@@ -44,6 +44,8 @@ const Hero = styled.div`
   @media (max-width: 660px) {
     padding: 30px 30px;
   }
+  display: flex;
+  flex-direction: column;
 `;
 
 const HeroNav = styled.ul`
@@ -69,7 +71,7 @@ const HeroNav = styled.ul`
 
 const HeroTitleGroup = styled.div`
   position: relative;
-  margin-top: 270px;
+  margin: auto 0;
 
   //   border: 1px solid green;
 `;
@@ -144,15 +146,15 @@ const HeroComp = () => {
       </HeroNav>
       <HeroTitleGroup>
         <HeroTitle>
-          HELLO TAIWAN <span class=".chinese-char">臺灣</span>!
+          HELLO TAIWAN <span className=".chinese-char">臺灣</span>!
           {/* HELLO TAIWAN! */}
         </HeroTitle>
         <HeroTitleTop>
-          HELLO TAIWAN <span class=".chinese-char">臺灣</span>!
+          HELLO TAIWAN <span className=".chinese-char">臺灣</span>!
           {/* HELLO TAIWAN! */}
         </HeroTitleTop>
         <HeroTitleBottom>
-          HELLO TAIWAN <span class=".chinese-char">臺灣</span>!
+          HELLO TAIWAN <span className=".chinese-char">臺灣</span>!
           {/* HELLO TAIWAN! */}
         </HeroTitleBottom>
       </HeroTitleGroup>
