@@ -13,8 +13,55 @@ const locs = ["wroclaw", "istanbul"];
 
 export default () => {
   const [cursorColor, setCursorColor] = useState(1);
+  const [currentSection, setCurrentSection] = useState("hero");
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const observerHero = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // if (document.querySelector(".bigger").innerHTML !== "0") {
+            //   document.querySelector(".bigger").style.opacity = 0;
+            //   document.querySelector(".bigger").style.transform =
+            //     "translateY(-100px)";
+            //   setTimeout(() => {
+            //     document.querySelector(".bigger").innerHTML = "0";
+            //     document.querySelector(".bigger").style.opacity = 1;
+            //     document.querySelector(".bigger").style.transform =
+            //       "translateY(0)";
+            //   }, 300);
+            // }
+            setCurrentSection("hero");
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    observerHero.observe(document.querySelector(".hero-section"));
+
+    const observerWroclawSection = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // if (document.querySelector(".bigger").innerHTML !== "0") {
+            //   document.querySelector(".bigger").style.opacity = 0;
+            //   document.querySelector(".bigger").style.transform =
+            //     "translateY(-100px)";
+            //   setTimeout(() => {
+            //     document.querySelector(".bigger").innerHTML = "0";
+            //     document.querySelector(".bigger").style.opacity = 1;
+            //     document.querySelector(".bigger").style.transform =
+            //       "translateY(0)";
+            //   }, 300);
+            // }
+            setCurrentSection("wroclaw");
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    observerWroclawSection.observe(document.querySelector(".wroclaw-section"));
+  }, []);
 
   const photos = useStaticQuery(graphql`
     query {
@@ -53,7 +100,7 @@ export default () => {
         );
       })}
       <Popout />
-      <SectionPagi />
+      <SectionPagi currentSection={currentSection} />
       <Cursor cursorColor={cursorColor} />
       <CursorPalette
         cursorColor={cursorColor}

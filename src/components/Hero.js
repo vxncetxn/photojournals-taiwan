@@ -135,7 +135,7 @@ const HeroTitleBottom = styled(HeroTitle)`
 
 const HeroComp = () => {
   return (
-    <Hero>
+    <Hero className="hero-section">
       <HeroNav>
         <li>
           <a href="/">All Photo Journals</a>

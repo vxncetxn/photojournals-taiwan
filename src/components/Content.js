@@ -19,6 +19,10 @@ const Content = styled.div`
   margin-top: 150px;
   padding: 30px 100px;
 
+  @media (max-width: 1100px) {
+    padding: 30px 70px;
+  }
+
   @media (max-width: 800px) {
     padding: 30px 50px;
   }
@@ -30,15 +34,20 @@ const Content = styled.div`
 
 const ImageRow = styled.div`
   margin-top: -4.25vw;
-  //   margin-top: -3.5vw;
   width: 85%;
-  //   height: 50vh;
   height: calc(20vh + 15vw);
-  //   min-height: 372px;
   display: flex;
   justify-content: start;
   gap: 1vw;
   clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
+
+  @media (max-width: 1100px) {
+    margin-top: -4.8vw;
+  }
+
+  @media (max-width: 800px) {
+    margin-top: -5.75vw;
+  }
 
   & > .gatsby-image-wrapper {
     // transition: all 0.3s ease;
@@ -83,32 +92,8 @@ const ContentComp = ({ loc, locPhotos }) => {
     }
   }, []);
 
-  //   const groupedLocPhotos = [];
-  //   let idxCounter = 0;
-  //   for (let i = 0; i < Math.round(locPhotos.length / 4); i++) {
-  //     const group = [];
-  //     for (let j = 0; j < 4; j++) {
-  //       group.push(locPhotos[(i + 1) * j]);
-  //       idxCounter++;
-  //     }
-  //     groupedLocPhotos.push(group);
-  //   }
-
-  //   const groupedLocPhotos = [];
-  //   let idxCounter = 0;
-  //   for (let i = 0; i < Math.round(locPhotos.length / 4); i++) {
-  //     const group = [];
-  //     for (let i = 0; i < 4; i++) {
-  //       if (locPhotos[idxCounter]) {
-  //         group.push(locPhotos[idxCounter]);
-  //         idxCounter++;
-  //       }
-  //     }
-  //     groupedLocPhotos.push(group);
-  //   }
-
   return (
-    <Content>
+    <Content className={`${loc}-section`}>
       {groupedLocPhotos.map(group => {
         return (
           <ImageRow>

@@ -27,14 +27,6 @@ const PopoutLabel = styled.div`
   cursor: pointer;
   transform: translate(-50px, 77.5px) rotate(-90deg);
 
-  @media (max-width: 1100px) {
-    background-color: yellow;
-  }
-
-  @media (max-width: 800px) {
-    background-color: green;
-  }
-
   @media (max-width: 660px) {
     font-size: 2rem;
   }
