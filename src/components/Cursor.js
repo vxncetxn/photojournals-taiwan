@@ -2,6 +2,13 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { window } from "browser-monads";
 
+const cursorColorList = [
+  "var(--color-primary)",
+  "var(--color-secondary)",
+  "var(--color-tertiary)",
+  "silver"
+];
+
 const Cursor = styled.div`
   position: fixed;
   top: 0;
@@ -13,7 +20,7 @@ const Cursor = styled.div`
   height: 140px;
   clip-path: circle(30%);
   mix-blend-mode: difference;
-  background-color: var(--color-secondary);
+  background-color: ${props => cursorColorList[props.cursorColor]};
 
   transition: clip-path 0.3s ease;
   pointer-events: none;
@@ -23,7 +30,7 @@ const Cursor = styled.div`
   align-items: center;
 `;
 
-const CursorComp = () => {
+const CursorComp = ({ cursorColor }) => {
   useEffect(() => {
     window.addEventListener("mousemove", e => {
       document.querySelector(".cursor").style.left = `${e.clientX - 70}px`;
@@ -31,7 +38,7 @@ const CursorComp = () => {
     });
   }, []);
 
-  return <Cursor className="cursor" />;
+  return <Cursor cursorColor={cursorColor} className="cursor" />;
 };
 
 export default CursorComp;
