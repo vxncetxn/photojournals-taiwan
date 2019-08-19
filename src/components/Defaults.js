@@ -7,9 +7,9 @@ const Defaults = createGlobalStyle`
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans+SC:700&display=optional");
 
 :root {
-    --font-primary: Lato;
-    --font-secondary: Contrail One;
-    --font-mono: Roboto Mono;
+    --font-primary: Contrail One;
+    --font-secondary: Roboto Mono;
+    --font-nav: Lato;
     --font-chinese: Noto Sans SC;
 
     --color-primary: #0c1727;

@@ -19,16 +19,17 @@ const Popout = styled.div`
 
 const PopoutLabel = styled.div`
   position: absolute;
-  font-family: "Lato", sans-serif;
-  font-size: 2.2rem;
+  font-family: var(--font-secondary), sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
   text-transform: uppercase;
   color: var(--color-white);
   padding: 20px;
   cursor: pointer;
-  transform: translate(-50px, 77.5px) rotate(-90deg);
+  transform: translate(-54px, 74px) rotate(-90deg);
 
   @media (max-width: 660px) {
-    font-size: 2rem;
+    transform: translate(-58px, 74px) rotate(-90deg);
   }
 
   //   border: 1px solid green;

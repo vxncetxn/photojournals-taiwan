@@ -4,7 +4,6 @@ import styled, { keyframes } from "styled-components";
 const TopTitlePhaseOne = keyframes`
   100% {
     opacity: 1;
-    // transform: translateY(-80px);
     transform: translateY(-5vw);
   }
 `;
@@ -12,27 +11,24 @@ const TopTitlePhaseOne = keyframes`
 const BottomTitlePhaseOne = keyframes`
   100% {
     opacity: 1;
-    // transform: translateY(80px);
     transform: translateY(5vw);
   }
 `;
 
 const TopTitlePhaseTwo = keyframes`
-100% {
-    // transform: rotate(-4deg) translate(-30px, -80px);
+  100% {
     transform: rotate(-4deg) translate(-1.875vw, -5vw);
   }
 `;
 
 const MiddleTitlePhaseTwo = keyframes`
-100% {
+  100% {
     transform: rotate(-4deg) translate(1.875vw, 0vw);
   }
 `;
 
 const BottomTitlePhaseTwo = keyframes`
-100% {
-    // transform: rotate(-4deg) translate(90px, 80px);
+  100% {
     transform: rotate(-4deg) translate(5.625vw, 5vw);
   }
 `;
@@ -52,15 +48,17 @@ const HeroNav = styled.ul`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   // border: 1px solid green;
 
   & span,
   a {
-    font-family: var(--font-primary), sans-serif;
+    font-family: var(--font-nav), sans-serif;
     font-size: 1.6rem;
     font-weight: 300;
     text-transform: uppercase;
     color: var(--color-white);
+
     // border: 1px solid blue;
   }
 
@@ -77,8 +75,7 @@ const HeroTitleGroup = styled.div`
 `;
 
 const HeroTitle = styled.h1`
-  font-family: var(--font-secondary), sans-serif;
-  //   font-size: 14.5rem;
+  font-family: var(--font-primary), sans-serif;
   font-size: 9.75vw;
   line-height: 0.5;
   color: var(--color-secondary);
@@ -95,7 +92,6 @@ const HeroTitle = styled.h1`
   }
 
   @media (max-width: 660px) {
-    // font-size: 13vw;
     display: none;
   }
 
@@ -122,17 +118,6 @@ const HeroTitleBottom = styled(HeroTitle)`
     ${BottomTitlePhaseTwo} 0.6s 0.8s forwards;
 `;
 
-// const HeroTitleMobile = styled.h1`
-//   font-family: var(--font-secondary), sans-serif;
-//   //   font-size: 14.5rem;
-//   font-size: 9.75vw;
-//   line-height: 0.5;
-//   color: var(--color-secondary);
-//   margin-left: 2.5vw;
-//   mix-blend-mode: difference;
-//   animation: ${MiddleTitlePhaseTwo} 0.6s 0.8s forwards;
-// `;
-
 const HeroComp = () => {
   return (
     <Hero className="hero-section">
@@ -147,15 +132,12 @@ const HeroComp = () => {
       <HeroTitleGroup>
         <HeroTitle>
           HELLO TAIWAN <span className=".chinese-char">臺灣</span>!
-          {/* HELLO TAIWAN! */}
         </HeroTitle>
         <HeroTitleTop>
           HELLO TAIWAN <span className=".chinese-char">臺灣</span>!
-          {/* HELLO TAIWAN! */}
         </HeroTitleTop>
         <HeroTitleBottom>
           HELLO TAIWAN <span className=".chinese-char">臺灣</span>!
-          {/* HELLO TAIWAN! */}
         </HeroTitleBottom>
       </HeroTitleGroup>
     </Hero>

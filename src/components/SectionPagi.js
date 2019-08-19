@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const SectionPagi = styled.div`
-  font-family: "Roboto Mono", sans-serif;
+  font-family: var(--font-secondary), sans-serif;
   font-weight: 700;
   color: #182e4e;
   position: fixed;
@@ -19,7 +19,7 @@ const Digits = styled.span`
   display: inline-block;
   font-size: ${props => props.fontSize};
   line-height: 0;
-  transition: all 0.3s linear;
+  transition: opacity 0.3s linear, transform 0.3s linear;
 `;
 
 const SectionPagiComp = ({ currentSection }) => {
