@@ -11,6 +11,10 @@ const CursorPalette = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+
+  @media (max-width: 660px) {
+    display: none;
+  }
 `;
 
 const CursorChoice = styled.div`

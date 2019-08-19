@@ -9,19 +9,23 @@ const SectionPagi = styled.div`
   bottom: 0;
   right: 90px;
   mix-blend-mode: difference;
+
+  @media (max-width: 660px) {
+    right: 30px;
+  }
 `;
 
 const Digits = styled.span`
   font-size: ${props => props.fontSize};
   line-height: 0;
-  transition: all 0.3s linear;
+  //   transition: all 0.3s linear;
 `;
 
 const SectionPagiComp = () => {
   return (
     <SectionPagi>
-      <Digits fontSize="20rem">0</Digits>
-      <Digits fontSize="21rem">0</Digits>
+      <Digits fontSize="calc(6rem + 10vw)">0</Digits>
+      <Digits fontSize="calc(7rem + 10vw)">0</Digits>
       <Digits fontSize="2.4rem">/5</Digits>
     </SectionPagi>
   );

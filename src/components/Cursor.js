@@ -28,6 +28,10 @@ const Cursor = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 660px) {
+    display: none;
+  }
 `;
 
 const CursorComp = ({ cursorColor }) => {
