@@ -22,7 +22,8 @@
     "gatsby-transformer-sharp": "^2.2.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "styled-normalize": "^8.0.6"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",

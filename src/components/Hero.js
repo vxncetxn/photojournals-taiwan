@@ -37,7 +37,7 @@ const Hero = styled.div`
   height: 100vh;
   min-height: 710px;
   padding: 30px 60px;
-  @media (max-width: 660px) {
+  @media (max-width: 520px) {
     padding: 30px 30px;
   }
   display: flex;
@@ -91,7 +91,7 @@ const HeroTitle = styled.h1`
     font-size: 9.2vw;
   }
 
-  @media (max-width: 660px) {
+  @media (max-width: 520px) {
     display: none;
   }
 

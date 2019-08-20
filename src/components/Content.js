@@ -27,8 +27,52 @@ const Content = styled.div`
     padding: 30px 50px;
   }
 
-  @media (max-width: 660px) {
+  @media (max-width: 520px) {
     padding: 30px 30px;
+  }
+`;
+
+const ImageRowsGroup = styled.div`
+  position: relative;
+
+  // border: 1px solid green;
+
+  &::before {
+    content: "Kaohsiung 高雄";
+    position: absolute;
+    left: -2.75vw;
+    top: -7.5vw;
+
+    z-index: 1;
+    display: inline-block;
+    font-size: 12.5vw;
+    font-family: var(--font-primary), var(--font-chinese), sans-serif;
+    font-weight: 700;
+    // letter-spacing: 10px;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    mix-blend-mode: exclusion;
+    transform-origin: 100% 50%;
+    transform: rotate(-4.25deg);
+    pointer-events: none;
+
+    @media (max-width: 800px) {
+      transform: rotate(-4.75deg);
+    }
+
+    @media (max-width: 700px) {
+      transform: rotate(-6deg);
+    }
+
+    @media (max-width: 470px) {
+      transform: rotate(-7deg);
+    }
+
+    @media (max-width: 410px) {
+      transform: rotate(-8deg);
+    }
+
+    // border: 1px solid red;
   }
 `;
 
@@ -38,8 +82,12 @@ const ImageRow = styled.div`
   height: calc(20vh + 15vw);
   display: flex;
   justify-content: start;
-  gap: 1vw;
+  //   gap: 1vw;
   clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
+
+  & > .gatsby-image-wrapper + .gatsby-image-wrapper {
+    margin-left: 1vw;
+  }
 
   @media (max-width: 1100px) {
     margin-top: -4.8vw;
@@ -61,7 +109,7 @@ const ImageRow = styled.div`
       flex: 1 0 calc((100% - 60px) / 2);
     }
 
-    @media (max-width: 660px) {
+    @media (max-width: 520px) {
       flex: 1 0 calc((100% - 60px) / 1);
     }
   }
@@ -77,7 +125,7 @@ const ContentComp = ({ loc, locPhotos }) => {
   useEffect(() => {
     if (window) {
       window.addEventListener("resize", () => {
-        if (window.innerWidth <= 660) {
+        if (window.innerWidth <= 520) {
           setGroupSize(1);
         } else if (window.innerWidth <= 800) {
           setGroupSize(2);
@@ -94,17 +142,19 @@ const ContentComp = ({ loc, locPhotos }) => {
 
   return (
     <Content className={`${loc}-section`}>
-      {groupedLocPhotos.map(group => {
-        return (
-          <ImageRow>
-            {group.map(photo => {
-              return (
-                <Img fluid={photo.fluid} imgStyle={{ objectFit: "cover" }} />
-              );
-            })}
-          </ImageRow>
-        );
-      })}
+      <ImageRowsGroup>
+        {groupedLocPhotos.map(group => {
+          return (
+            <ImageRow>
+              {group.map(photo => {
+                return (
+                  <Img fluid={photo.fluid} imgStyle={{ objectFit: "cover" }} />
+                );
+              })}
+            </ImageRow>
+          );
+        })}
+      </ImageRowsGroup>
     </Content>
   );
 };

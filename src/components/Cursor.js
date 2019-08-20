@@ -3,9 +3,9 @@ import styled, { keyframes } from "styled-components";
 import { window } from "browser-monads";
 
 const cursorColorList = [
-  "var(--color-primary)",
   "var(--color-secondary)",
   "var(--color-tertiary)",
+  "gold",
   "silver"
 ];
 
@@ -38,7 +38,7 @@ const Cursor = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 660px) {
+  @media (max-width: 520px) {
     display: none;
   }
 `;

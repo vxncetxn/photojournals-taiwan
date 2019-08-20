@@ -12,7 +12,7 @@ const CursorPalette = styled.div`
   justify-content: space-evenly;
   align-items: center;
 
-  @media (max-width: 660px) {
+  @media (max-width: 520px) {
     display: none;
   }
 `;
@@ -25,19 +25,19 @@ const CursorChoice = styled.div`
 `;
 
 const CursorChoiceOne = styled(CursorChoice)`
-  background-color: gold;
+  background-color: var(--color-secondary);
   border: ${props =>
     props.cursorColor === 0 ? "4px solid var(--color-white)" : "none"};
 `;
 
 const CursorChoiceTwo = styled(CursorChoice)`
-  background-color: var(--color-secondary);
+  background-color: var(--color-tertiary);
   border: ${props =>
     props.cursorColor === 1 ? "4px solid var(--color-white)" : "none"};
 `;
 
 const CursorChoiceThree = styled(CursorChoice)`
-  background-color: var(--color-tertiary);
+  background-color: gold;
   border: ${props =>
     props.cursorColor === 2 ? "4px solid var(--color-white)" : "none"};
 `;

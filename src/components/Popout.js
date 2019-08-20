@@ -11,7 +11,7 @@ const Popout = styled.div`
   clip-path: polygon(100% 0, 100% 92%, 18% 100%, 18% 55%, 0 57%, 0 8%);
   transition: all 0.4s ease-in;
 
-  @media (max-width: 660px) {
+  @media (max-width: 520px) {
     width: 300px;
     right: ${props => (props.popped ? `0` : `-246px`)};
   }
@@ -28,7 +28,7 @@ const PopoutLabel = styled.div`
   cursor: pointer;
   transform: translate(-54px, 74px) rotate(-90deg);
 
-  @media (max-width: 660px) {
+  @media (max-width: 520px) {
     transform: translate(-58px, 74px) rotate(-90deg);
   }
 

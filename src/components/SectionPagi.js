@@ -10,7 +10,7 @@ const SectionPagi = styled.div`
   right: 90px;
   mix-blend-mode: difference;
 
-  @media (max-width: 660px) {
+  @media (max-width: 520px) {
     right: 30px;
   }
 `;
