@@ -41,6 +41,7 @@ body {
     background-color: var(--color-primary);
     isolation: isolate;
     overflow-x: hidden;
+    cursor: none;
 }
 
 ul {
@@ -50,6 +51,7 @@ ul {
 a {
     text-decoration: none;
     color: black;
+    cursor: none;
 }
 
 .chinese-char {

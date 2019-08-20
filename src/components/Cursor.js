@@ -53,7 +53,22 @@ const CursorLabel = styled.span`
   font-weight: 700;
   text-transform: uppercase;
   color: #e6e6e6;
-  transform-origin: 60% 420%;
+  transform-origin: 60% 490%;
+
+  //   &::after {
+  //     position: absolute;
+  //     top: 495%;
+  //     left: 39%;
+  //     width: 10px;
+  //     height: 10px;
+  //     content: "";
+  //     background-color: #f0f;
+  //     border-radius: 50%;
+  //     transform: translate(-50%, -50%);
+  //     pointer-events: none;
+  //   }
+
+  //   border: 1px solid red;
 
   animation: ${CursorRotate} 10s linear infinite;
 `;
@@ -75,7 +90,7 @@ const CursorIcon = styled.span`
   animation: ${CursorRotate} 10s linear infinite;
 `;
 
-const CursorComp = ({ cursorColor }) => {
+const CursorComp = ({ popped, cursorColor }) => {
   useEffect(() => {
     window.addEventListener("mousemove", e => {
       document.querySelector(".cursor").style.left = `${e.clientX - 70}px`;
@@ -92,22 +107,82 @@ const CursorComp = ({ cursorColor }) => {
     document.querySelectorAll(".gatsby-image-wrapper").forEach(node => {
       node.addEventListener("mouseenter", () => {
         document.querySelector(".cursor").style.clipPath = "circle(50%)";
+        document.querySelector(".cursor-label").innerHTML = "View Image";
         document.querySelector(".cursor-label").style.display = "block";
+        document.querySelector(".cursor-label").style.transformOrigin =
+          "39% 495%";
+        document.querySelector(".cursor-icon").innerHTML = `<svg
+            enableBackground="new 0 0 488.85 488.85"
+            viewBox="0 0 488.85 488.85"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20px"
+            fill="#fcfcfc"
+          >
+            <path d="m244.425 98.725c-93.4 0-178.1 51.1-240.6 134.1-5.1 6.8-5.1 16.3 0 23.1 62.5 83.1 147.2 134.2 240.6 134.2s178.1-51.1 240.6-134.1c5.1-6.8 5.1-16.3 0-23.1-62.5-83.1-147.2-134.2-240.6-134.2zm6.7 248.3c-62 3.9-113.2-47.2-109.3-109.3 3.2-51.2 44.7-92.7 95.9-95.9 62-3.9 113.2 47.2 109.3 109.3-3.3 51.1-44.8 92.6-95.9 95.9zm-3.1-47.4c-33.4 2.1-61-25.4-58.8-58.8 1.7-27.6 24.1-49.9 51.7-51.7 33.4-2.1 61 25.4 58.8 58.8-1.8 27.7-24.2 50-51.7 51.7z" />
+          </svg>`;
         document.querySelector(".cursor-icon").style.display = "block";
       });
       node.addEventListener("mouseleave", () => {
         document.querySelector(".cursor").style.clipPath = "circle(30%)";
+        document.querySelector(".cursor-label").innerHTML = null;
         document.querySelector(".cursor-label").style.display = "none";
+        document.querySelector(".cursor-icon").innerHTML = null;
         document.querySelector(".cursor-icon").style.display = "none";
       });
     });
   }, []);
 
+  useEffect(() => {
+    if (popped) {
+      document
+        .querySelector(".popout-label")
+        .addEventListener("mouseenter", () => {
+          document.querySelector(".cursor").style.clipPath = "circle(50%)";
+          document.querySelector(".cursor-label").innerHTML = "Close";
+          document.querySelector(".cursor-label").style.display = "block";
+          document.querySelector(".cursor-label").style.transformOrigin =
+            "70% 490%";
+          document.querySelector(".cursor-icon").innerHTML = "-";
+          document.querySelector(".cursor-icon").style.display = "block";
+        });
+      document
+        .querySelector(".popout-label")
+        .addEventListener("mouseleave", () => {
+          document.querySelector(".cursor").style.clipPath = "circle(30%)";
+          document.querySelector(".cursor-label").innerHTML = null;
+          document.querySelector(".cursor-label").style.display = "none";
+          document.querySelector(".cursor-icon").innerHTML = null;
+          document.querySelector(".cursor-icon").style.display = "none";
+        });
+    } else {
+      document
+        .querySelector(".popout-label")
+        .addEventListener("mouseenter", () => {
+          document.querySelector(".cursor").style.clipPath = "circle(50%)";
+          document.querySelector(".cursor-label").innerHTML = "Expand";
+          document.querySelector(".cursor-label").style.display = "block";
+          document.querySelector(".cursor-label").style.transformOrigin =
+            "60% 490%";
+          document.querySelector(".cursor-icon").innerHTML = "+";
+          document.querySelector(".cursor-icon").style.display = "block";
+        });
+      document
+        .querySelector(".popout-label")
+        .addEventListener("mouseleave", () => {
+          document.querySelector(".cursor").style.clipPath = "circle(30%)";
+          document.querySelector(".cursor-label").innerHTML = null;
+          document.querySelector(".cursor-label").style.display = "none";
+          document.querySelector(".cursor-icon").innerHTML = null;
+          document.querySelector(".cursor-icon").style.display = "none";
+        });
+    }
+  }, [popped]);
+
   return (
     <>
       <Cursor cursorColor={cursorColor} className="cursor" />
-      <CursorLabel className="cursor-label">Expand</CursorLabel>
-      <CursorIcon className="cursor-icon">+</CursorIcon>
+      <CursorLabel className="cursor-label"></CursorLabel>
+      <CursorIcon className="cursor-icon"></CursorIcon>
     </>
   );
 };

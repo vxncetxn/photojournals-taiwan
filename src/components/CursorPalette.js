@@ -21,7 +21,6 @@ const CursorChoice = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 50px;
-  cursor: pointer;
 `;
 
 const CursorChoiceOne = styled(CursorChoice)`

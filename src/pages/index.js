@@ -12,6 +12,7 @@ import CursorPalette from "../components/CursorPalette";
 const locs = ["wroclaw", "istanbul"];
 
 export default () => {
+  const [popped, setPopped] = useState(false);
   const [cursorColor, setCursorColor] = useState(0);
   const [currentSection, setCurrentSection] = useState("hero");
 
@@ -77,9 +78,9 @@ export default () => {
           />
         );
       })}
-      <Popout />
+      <Popout popped={popped} setPopped={setPopped} />
       <SectionPagi currentSection={currentSection} />
-      <Cursor cursorColor={cursorColor} />
+      <Cursor popped={popped} cursorColor={cursorColor} />
       <CursorPalette
         cursorColor={cursorColor}
         setCursorColor={setCursorColor}

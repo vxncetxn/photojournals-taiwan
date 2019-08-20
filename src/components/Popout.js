@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Popout = styled.div`
@@ -25,7 +25,6 @@ const PopoutLabel = styled.div`
   text-transform: uppercase;
   color: var(--color-white);
   padding: 20px;
-  cursor: pointer;
   transform: translate(-54px, 74px) rotate(-90deg);
 
   @media (max-width: 520px) {
@@ -35,11 +34,11 @@ const PopoutLabel = styled.div`
   //   border: 1px solid green;
 `;
 
-const PopoutComp = () => {
-  const [popped, setPopped] = useState(false);
+const PopoutComp = ({ popped, setPopped }) => {
   return (
     <Popout popped={popped}>
       <PopoutLabel
+        className="popout-label"
         onClick={() => {
           if (popped) {
             setPopped(false);
