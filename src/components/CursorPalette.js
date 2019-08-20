@@ -51,18 +51,22 @@ const CursorPaletteComp = ({ cursorColor, setCursorColor }) => {
   return (
     <CursorPalette>
       <CursorChoiceOne
+        className="cursor-choice"
         cursorColor={cursorColor}
         onClick={() => setCursorColor(0)}
       />
       <CursorChoiceTwo
+        className="cursor-choice"
         cursorColor={cursorColor}
         onClick={() => setCursorColor(1)}
       />
       <CursorChoiceThree
+        className="cursor-choice"
         cursorColor={cursorColor}
         onClick={() => setCursorColor(2)}
       />
       <CursorChoiceFour
+        className="cursor-choice"
         cursorColor={cursorColor}
         onClick={() => setCursorColor(3)}
       />
