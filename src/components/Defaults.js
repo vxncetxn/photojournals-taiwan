@@ -32,7 +32,7 @@ html {
     font-size: 62.5%;
 }
 
-*, *::before, *::after { 
+*::before, *::after { 
     padding: 0; margin: 0; box-sizing: inherit; font-family: inherit; 
 }
 

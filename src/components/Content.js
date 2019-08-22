@@ -66,10 +66,12 @@ const ImageRowsGroup = styled.div`
 
     @media (max-width: 470px) {
       transform: rotate(-7deg);
+      left: -4vw;
     }
 
     @media (max-width: 410px) {
       transform: rotate(-8deg);
+      left: -5vw;
     }
 
     // border: 1px solid red;
