@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext, memo } from "react";
 import styled from "styled-components";
+
+import { CursorContext } from "../CursorContext";
 
 const Popout = styled.div`
   position: fixed;
@@ -34,7 +36,9 @@ const PopoutLabel = styled.div`
   //   border: 1px solid green;
 `;
 
-const PopoutComp = ({ popped, setPopped }) => {
+const PopoutComp = memo(({ popped, setPopped }) => {
+  const setCursorLoc = useContext(CursorContext);
+
   return (
     <Popout popped={popped}>
       <PopoutLabel
@@ -46,11 +50,19 @@ const PopoutComp = ({ popped, setPopped }) => {
             setPopped(true);
           }
         }}
+        onMouseEnter={() => {
+          if (popped) {
+            setCursorLoc("popped-label");
+          } else {
+            setCursorLoc("unpopped-label");
+          }
+        }}
+        onMouseLeave={() => setCursorLoc("neutral")}
       >
         Locations
       </PopoutLabel>
     </Popout>
   );
-};
+});
 
 export default PopoutComp;

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext, memo } from "react";
 import styled from "styled-components";
+
+import { CursorContext } from "../CursorContext";
 
 const CursorPalette = styled.div`
   width: 60px;
@@ -47,31 +49,41 @@ const CursorChoiceFour = styled(CursorChoice)`
     props.cursorColor === 3 ? "4px solid var(--color-white)" : "none"};
 `;
 
-const CursorPaletteComp = ({ cursorColor, setCursorColor }) => {
+const CursorPaletteComp = memo(({ cursorColor, setCursorColor }) => {
+  const setCursorLoc = useContext(CursorContext);
+
   return (
     <CursorPalette>
       <CursorChoiceOne
         className="cursor-choice"
         cursorColor={cursorColor}
         onClick={() => setCursorColor(0)}
+        onMouseEnter={() => setCursorLoc("choice")}
+        onMouseLeave={() => setCursorLoc("neutral")}
       />
       <CursorChoiceTwo
         className="cursor-choice"
         cursorColor={cursorColor}
         onClick={() => setCursorColor(1)}
+        onMouseEnter={() => setCursorLoc("choice")}
+        onMouseLeave={() => setCursorLoc("neutral")}
       />
       <CursorChoiceThree
         className="cursor-choice"
         cursorColor={cursorColor}
         onClick={() => setCursorColor(2)}
+        onMouseEnter={() => setCursorLoc("choice")}
+        onMouseLeave={() => setCursorLoc("neutral")}
       />
       <CursorChoiceFour
         className="cursor-choice"
         cursorColor={cursorColor}
         onClick={() => setCursorColor(3)}
+        onMouseEnter={() => setCursorLoc("choice")}
+        onMouseLeave={() => setCursorLoc("neutral")}
       />
     </CursorPalette>
   );
-};
+});
 
 export default CursorPaletteComp;

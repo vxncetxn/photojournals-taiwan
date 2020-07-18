@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext, memo } from "react";
 import styled, { keyframes } from "styled-components";
+
+import { CursorContext } from "../CursorContext";
 
 const TopTitlePhaseOne = keyframes`
   100% {
@@ -118,14 +120,22 @@ const HeroTitleBottom = styled(HeroTitle)`
     ${BottomTitlePhaseTwo} 0.6s 0.8s forwards;
 `;
 
-const HeroComp = () => {
+const HeroComp = memo(() => {
+  const setCursorLoc = useContext(CursorContext);
+
   return (
     <Hero className="hero-section">
       <HeroNav>
-        <li>
+        <li
+          onMouseEnter={() => setCursorLoc("anchor")}
+          onMouseLeave={() => setCursorLoc("neutral")}
+        >
           <a href="/">All Photo Journals</a>
         </li>
-        <li>
+        <li
+          onMouseEnter={() => setCursorLoc("anchor")}
+          onMouseLeave={() => setCursorLoc("neutral")}
+        >
           <a href="/">Portfolio</a>
         </li>
       </HeroNav>
@@ -142,6 +152,6 @@ const HeroComp = () => {
       </HeroTitleGroup>
     </Hero>
   );
-};
+});
 
 export default HeroComp;

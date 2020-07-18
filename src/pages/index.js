@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { graphql, useStaticQuery } from "gatsby";
 
+import { CursorContext } from "../CursorContext";
+
 import Defaults from "../components/Defaults";
 import Hero from "../components/Hero";
 import Content from "../components/Content";
@@ -13,6 +15,7 @@ const locs = ["wroclaw", "istanbul"];
 
 export default () => {
   const [popped, setPopped] = useState(false);
+  const [cursorLoc, setCursorLoc] = useState("neutral");
   const [cursorColor, setCursorColor] = useState(0);
   const [currentSection, setCurrentSection] = useState("hero");
 
@@ -57,34 +60,40 @@ export default () => {
     }
   `).allFile.nodes;
 
-  console.log(photos);
+  // console.log(photos);
 
   return (
     <>
       <Defaults />
-      <Hero />
-      {locs.map(loc => {
-        return (
-          <Content
-            key={loc}
-            loc={loc}
-            locPhotos={photos.flatMap(photo => {
-              if (photo.relativeDirectory === loc) {
-                return photo.sharp;
-              } else {
-                return [];
-              }
-            })}
-          />
-        );
-      })}
-      <Popout popped={popped} setPopped={setPopped} />
-      <SectionPagi currentSection={currentSection} />
-      <Cursor popped={popped} cursorColor={cursorColor} />
-      <CursorPalette
-        cursorColor={cursorColor}
-        setCursorColor={setCursorColor}
-      />
+      <CursorContext.Provider value={setCursorLoc}>
+        <Hero />
+        {locs.map(loc => {
+          return (
+            <Content
+              key={loc}
+              loc={loc}
+              locPhotos={photos.flatMap(photo => {
+                if (photo.relativeDirectory === loc) {
+                  return photo.sharp;
+                } else {
+                  return [];
+                }
+              })}
+            />
+          );
+        })}
+        <Popout popped={popped} setPopped={setPopped} />
+        <SectionPagi currentSection={currentSection} />
+        <Cursor
+          cursorLoc={cursorLoc}
+          popped={popped}
+          cursorColor={cursorColor}
+        />
+        <CursorPalette
+          cursorColor={cursorColor}
+          setCursorColor={setCursorColor}
+        />
+      </CursorContext.Provider>
     </>
   );
 };

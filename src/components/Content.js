@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 import { window } from "browser-monads";
+
+import { CursorContext } from "../CursorContext";
 
 function arrayTo2DArray2(list, howMany) {
   var idx = 0;
@@ -35,8 +37,6 @@ const Content = styled.div`
 const ImageRowsGroup = styled.div`
   position: relative;
 
-  // border: 1px solid green;
-
   &::before {
     content: "Kaohsiung 高雄";
     position: absolute;
@@ -48,7 +48,6 @@ const ImageRowsGroup = styled.div`
     font-size: 12.5vw;
     font-family: var(--font-primary), var(--font-chinese), sans-serif;
     font-weight: 700;
-    // letter-spacing: 10px;
     text-transform: uppercase;
     color: var(--color-secondary);
     mix-blend-mode: exclusion;
@@ -73,8 +72,6 @@ const ImageRowsGroup = styled.div`
       transform: rotate(-8deg);
       left: -5vw;
     }
-
-    // border: 1px solid red;
   }
 `;
 
@@ -84,7 +81,6 @@ const ImageRow = styled.div`
   height: calc(20vh + 15vw);
   display: flex;
   justify-content: start;
-  //   gap: 1vw;
   clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
 
   & > .gatsby-image-wrapper + .gatsby-image-wrapper {
@@ -115,11 +111,11 @@ const ImageRow = styled.div`
       flex: 1 0 calc((100% - 60px) / 1);
     }
   }
-
-  //   border: 1px solid red;
 `;
 
 const ContentComp = ({ loc, locPhotos }) => {
+  const setCursorLoc = useContext(CursorContext);
+
   const [groupSize, setGroupSize] = useState(4);
 
   let groupedLocPhotos = arrayTo2DArray2(locPhotos, groupSize);
@@ -150,7 +146,12 @@ const ContentComp = ({ loc, locPhotos }) => {
             <ImageRow>
               {group.map(photo => {
                 return (
-                  <Img fluid={photo.fluid} imgStyle={{ objectFit: "cover" }} />
+                  <Img
+                    onMouseEnter={() => setCursorLoc("image")}
+                    onMouseLeave={() => setCursorLoc("neutral")}
+                    fluid={photo.fluid}
+                    imgStyle={{ objectFit: "cover" }}
+                  />
                 );
               })}
             </ImageRow>
