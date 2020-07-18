@@ -1,13 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
 
+require("typeface-contrail-one");
+require("typeface-roboto-mono");
+require("typeface-lato");
+
 const Defaults = createGlobalStyle`
 ${normalize}
-
-@import url("https://fonts.googleapis.com/css?family=Lato:300,400&display=optional");
-@import url("https://fonts.googleapis.com/css?family=Contrail+One&display=optional");
-@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:700&display=optional");
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans+SC:700&display=optional");
 
 :root {
     --font-primary: Contrail One;
