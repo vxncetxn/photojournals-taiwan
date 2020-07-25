@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from "react";
+import React, { useEffect, useContext, memo } from "react";
 import styled, { keyframes } from "styled-components";
 import { window } from "browser-monads";
 
@@ -101,7 +101,7 @@ const CursorIcon = styled.span`
   animation: ${CursorRotate} 10s linear infinite forwards;
 `;
 
-const CursorComp = memo(({ cursorLoc, popped, cursorColor }) => {
+const CursorComp = memo(({ cursorLoc, cursorColor }) => {
   useEffect(() => {
     window.addEventListener("mousemove", e => {
       document.querySelector(".cursor").style.left = `${e.clientX - 70}px`;
@@ -113,27 +113,6 @@ const CursorComp = memo(({ cursorLoc, popped, cursorColor }) => {
       document.querySelector(".cursor-icon").style.left = `${e.clientX - 25}px`;
       document.querySelector(".cursor-icon").style.top = `${e.clientY -
         23.5}px`;
-    });
-
-    document.querySelectorAll(".gatsby-image-wrapper").forEach(node => {
-      node.addEventListener("mouseenter", () => {
-        // document.querySelector(".cursor").style.clipPath = "circle(50%)";
-        // document.querySelector(".cursor-label").innerHTML = "View Image";
-        // document.querySelector(".cursor-icon").innerHTML = `<svg
-        //     enableBackground="new 0 0 488.85 488.85"
-        //     viewBox="0 0 488.85 488.85"
-        //     xmlns="http://www.w3.org/2000/svg"
-        //     width="20px"
-        //     fill="#fcfcfc"
-        //   >
-        //     <path d="m244.425 98.725c-93.4 0-178.1 51.1-240.6 134.1-5.1 6.8-5.1 16.3 0 23.1 62.5 83.1 147.2 134.2 240.6 134.2s178.1-51.1 240.6-134.1c5.1-6.8 5.1-16.3 0-23.1-62.5-83.1-147.2-134.2-240.6-134.2zm6.7 248.3c-62 3.9-113.2-47.2-109.3-109.3 3.2-51.2 44.7-92.7 95.9-95.9 62-3.9 113.2 47.2 109.3 109.3-3.3 51.1-44.8 92.6-95.9 95.9zm-3.1-47.4c-33.4 2.1-61-25.4-58.8-58.8 1.7-27.6 24.1-49.9 51.7-51.7 33.4-2.1 61 25.4 58.8 58.8-1.8 27.7-24.2 50-51.7 51.7z" />
-        //   </svg>`;
-      });
-      node.addEventListener("mouseleave", () => {
-        // document.querySelector(".cursor").style.clipPath = "circle(30%)";
-        // document.querySelector(".cursor-label").innerHTML = null;
-        // document.querySelector(".cursor-icon").innerHTML = null;
-      });
     });
   }, []);
 

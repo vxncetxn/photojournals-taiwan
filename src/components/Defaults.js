@@ -53,6 +53,11 @@ a {
     cursor: none;
 }
 
+button {
+    background: none;
+    border: none;
+}
+
 .chinese-char {
     font-family: "Noto Sans SC";
 }

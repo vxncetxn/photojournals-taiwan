@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, memo } from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 import { window } from "browser-monads";
@@ -38,7 +38,7 @@ const ImageRowsGroup = styled.div`
   position: relative;
 
   &::before {
-    content: "Kaohsiung 高雄";
+    content: "Taipei City 臺北";
     position: absolute;
     left: -2.75vw;
     top: -7.5vw;
@@ -83,7 +83,7 @@ const ImageRow = styled.div`
   justify-content: start;
   clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
 
-  & > .gatsby-image-wrapper + .gatsby-image-wrapper {
+  & > div + div {
     margin-left: 1vw;
   }
 
@@ -94,26 +94,29 @@ const ImageRow = styled.div`
   @media (max-width: 800px) {
     margin-top: -5.75vw;
   }
+`;
+
+const ImageWrapper = styled.div`
+  flex: 1 0 calc((100% - 60px) / 4);
+
+  @media (max-width: 1100px) {
+    flex: 1 0 calc((100% - 60px) / 3);
+  }
+
+  @media (max-width: 800px) {
+    flex: 1 0 calc((100% - 60px) / 2);
+  }
+
+  @media (max-width: 520px) {
+    flex: 1 0 calc((100% - 60px) / 1);
+  }
 
   & > .gatsby-image-wrapper {
-    // transition: all 0.3s ease;
-    flex: 1 0 calc((100% - 60px) / 4);
-
-    @media (max-width: 1100px) {
-      flex: 1 0 calc((100% - 60px) / 3);
-    }
-
-    @media (max-width: 800px) {
-      flex: 1 0 calc((100% - 60px) / 2);
-    }
-
-    @media (max-width: 520px) {
-      flex: 1 0 calc((100% - 60px) / 1);
-    }
+    height: 100%;
   }
 `;
 
-const ContentComp = ({ loc, locPhotos }) => {
+const ContentComp = memo(({ loc, locPhotos, setLightboxPhoto }) => {
   const setCursorLoc = useContext(CursorContext);
 
   const [groupSize, setGroupSize] = useState(4);
@@ -146,12 +149,16 @@ const ContentComp = ({ loc, locPhotos }) => {
             <ImageRow>
               {group.map(photo => {
                 return (
-                  <Img
+                  <ImageWrapper
                     onMouseEnter={() => setCursorLoc("image")}
                     onMouseLeave={() => setCursorLoc("neutral")}
-                    fluid={photo.fluid}
-                    imgStyle={{ objectFit: "cover" }}
-                  />
+                    onClick={() => setLightboxPhoto(photo)}
+                  >
+                    <Img
+                      fluid={photo.fluid}
+                      imgStyle={{ objectFit: "cover" }}
+                    />
+                  </ImageWrapper>
                 );
               })}
             </ImageRow>
@@ -160,6 +167,6 @@ const ContentComp = ({ loc, locPhotos }) => {
       </ImageRowsGroup>
     </Content>
   );
-};
+});
 
 export default ContentComp;

@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import { CursorContext } from "../CursorContext";
 
 import Defaults from "../components/Defaults";
+import Lightbox from "../components/Lightbox";
 import Hero from "../components/Hero";
 import Content from "../components/Content";
 import Popout from "../components/Popout";
@@ -11,13 +12,14 @@ import SectionPagi from "../components/SectionPagi";
 import Cursor from "../components/Cursor";
 import CursorPalette from "../components/CursorPalette";
 
-const locs = ["wroclaw", "istanbul"];
+const locs = ["taipei", "istanbul"];
 
 export default () => {
   const [popped, setPopped] = useState(false);
   const [cursorLoc, setCursorLoc] = useState("neutral");
   const [cursorColor, setCursorColor] = useState(0);
   const [currentSection, setCurrentSection] = useState("hero");
+  const [lightboxPhoto, setLightboxPhoto] = useState(null);
 
   //   useEffect(() => {
   //     const observerHero = new IntersectionObserver(
@@ -60,12 +62,16 @@ export default () => {
     }
   `).allFile.nodes;
 
-  // console.log(photos);
-
   return (
     <>
       <Defaults />
       <CursorContext.Provider value={setCursorLoc}>
+        {lightboxPhoto ? (
+          <Lightbox
+            lightboxPhoto={lightboxPhoto}
+            setLightboxPhoto={setLightboxPhoto}
+          />
+        ) : null}
         <Hero />
         {locs.map(loc => {
           return (
@@ -79,6 +85,7 @@ export default () => {
                   return [];
                 }
               })}
+              setLightboxPhoto={setLightboxPhoto}
             />
           );
         })}
