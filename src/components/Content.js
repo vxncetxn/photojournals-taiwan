@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, memo } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Img from "gatsby-image";
 import { window } from "browser-monads";
 
@@ -17,8 +17,18 @@ function arrayTo2DArray2(list, howMany) {
   return result;
 }
 
+const Marquee = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+`;
+
 const Content = styled.div`
-  margin-top: 150px;
+  position: relative;
   padding: 30px 100px;
 
   @media (max-width: 1100px) {
@@ -34,45 +44,40 @@ const Content = styled.div`
   }
 `;
 
-const ImageRowsGroup = styled.div`
+const HeaderWrapper = styled.div`
   position: relative;
+  z-index: 1;
+  transform-origin: 100% 50%;
+  transform: rotate(-3.5deg) translateY(30px);
+  pointer-events: none;
+  mix-blend-mode: exclusion;
 
-  &::before {
-    content: "Taipei City 臺北";
-    position: absolute;
-    left: -2.75vw;
-    top: -7.5vw;
-
-    z-index: 1;
-    display: inline-block;
-    font-size: 12.5vw;
-    font-family: var(--font-primary), var(--font-chinese), sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--color-secondary);
-    mix-blend-mode: exclusion;
-    transform-origin: 100% 50%;
-    transform: rotate(-4.25deg);
-    pointer-events: none;
-
-    @media (max-width: 800px) {
-      transform: rotate(-4.75deg);
-    }
-
-    @media (max-width: 700px) {
-      transform: rotate(-6deg);
-    }
-
-    @media (max-width: 470px) {
-      transform: rotate(-7deg);
-      left: -4vw;
-    }
-
-    @media (max-width: 410px) {
-      transform: rotate(-8deg);
-      left: -5vw;
-    }
+  @media (max-width: 800px) {
+    transform: rotate(-4.75deg);
   }
+
+  @media (max-width: 700px) {
+    transform: rotate(-6deg);
+  }
+
+  @media (max-width: 470px) {
+    transform: rotate(-7deg);
+  }
+
+  @media (max-width: 410px) {
+    transform: rotate(-8deg);
+  }
+`;
+
+const Header = styled.h2`
+  font-size: 12.5vw;
+  font-family: var(--font-primary), var(--font-chinese), sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  text-shadow: calc(100vw - 200px) 0 0 var(--color-secondary);
+
+  animation: ${Marquee} 5s linear infinite;
 `;
 
 const ImageRow = styled.div`
@@ -143,28 +148,26 @@ const ContentComp = memo(({ loc, locPhotos, setLightboxPhoto }) => {
 
   return (
     <Content className={`${loc}-section`}>
-      <ImageRowsGroup>
-        {groupedLocPhotos.map(group => {
-          return (
-            <ImageRow>
-              {group.map(photo => {
-                return (
-                  <ImageWrapper
-                    onMouseEnter={() => setCursorLoc("image")}
-                    onMouseLeave={() => setCursorLoc("neutral")}
-                    onClick={() => setLightboxPhoto(photo)}
-                  >
-                    <Img
-                      fluid={photo.fluid}
-                      imgStyle={{ objectFit: "cover" }}
-                    />
-                  </ImageWrapper>
-                );
-              })}
-            </ImageRow>
-          );
-        })}
-      </ImageRowsGroup>
+      <HeaderWrapper>
+        <Header>Taipei City 臺北</Header>
+      </HeaderWrapper>
+      {groupedLocPhotos.map(group => {
+        return (
+          <ImageRow>
+            {group.map(photo => {
+              return (
+                <ImageWrapper
+                  onMouseEnter={() => setCursorLoc("image")}
+                  onMouseLeave={() => setCursorLoc("neutral")}
+                  onClick={() => setLightboxPhoto(photo)}
+                >
+                  <Img fluid={photo.fluid} imgStyle={{ objectFit: "cover" }} />
+                </ImageWrapper>
+              );
+            })}
+          </ImageRow>
+        );
+      })}
     </Content>
   );
 });
