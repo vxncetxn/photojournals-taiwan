@@ -61,6 +61,11 @@ button {
 .chinese-char {
     font-family: "Noto Sans SC";
 }
+
+.trial-class {
+    transition: transform 0.5s ease-out, clip-path 0.5s ease-out,
+    width 0.5s ease-out, height 0.5s ease-out;
+}
 `;
 
 export default Defaults;

@@ -126,17 +126,23 @@ const HeroComp = memo(() => {
   return (
     <Hero className="hero-section">
       <HeroNav>
-        <li
-          onMouseEnter={() => setCursorLoc("anchor")}
-          onMouseLeave={() => setCursorLoc("neutral")}
-        >
-          <a href="/">All Photo Journals</a>
+        <li>
+          <a
+            onMouseEnter={() => setCursorLoc("anchor")}
+            onMouseLeave={() => setCursorLoc("neutral")}
+            href="/"
+          >
+            All Photo Journals
+          </a>
         </li>
-        <li
-          onMouseEnter={() => setCursorLoc("anchor")}
-          onMouseLeave={() => setCursorLoc("neutral")}
-        >
-          <a href="/">Portfolio</a>
+        <li>
+          <a
+            onMouseEnter={() => setCursorLoc("anchor")}
+            onMouseLeave={() => setCursorLoc("neutral")}
+            href="/"
+          >
+            Portfolio
+          </a>
         </li>
       </HeroNav>
       <HeroTitleGroup>
