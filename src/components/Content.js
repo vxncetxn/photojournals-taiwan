@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext, memo } from "react";
 import styled from "styled-components";
-import Img from "gatsby-image";
+// import Img from "gatsby-image";
 import { window } from "browser-monads";
 
 import { CursorContext } from "../CursorContext";
 
 import Marquee from "./Marquee";
+import { Thumbnail } from "./LightboxPackage";
 
 function arrayTo2DArray2(list, howMany) {
   var idx = 0;
@@ -57,34 +58,25 @@ const ImageRow = styled.div`
   }
 `;
 
-const ImageWrapper = styled.div`
-  flex: 1 0 calc((100% - 60px) / 4);
+// const ImageWrapper = styled.div`
+//   flex: 1 0 calc((100% - 60px) / 4);
 
-  @media (max-width: 1100px) {
-    flex: 1 0 calc((100% - 60px) / 3);
-  }
+//   @media (max-width: 1100px) {
+//     flex: 1 0 calc((100% - 60px) / 3);
+//   }
 
-  @media (max-width: 800px) {
-    flex: 1 0 calc((100% - 60px) / 2);
-  }
+//   @media (max-width: 800px) {
+//     flex: 1 0 calc((100% - 60px) / 2);
+//   }
 
-  @media (max-width: 520px) {
-    flex: 1 0 calc((100% - 60px) / 1);
-  }
+//   @media (max-width: 520px) {
+//     flex: 1 0 calc((100% - 60px) / 1);
+//   }
 
-  & > .gatsby-image-wrapper {
-    height: 100%;
-  }
-`;
-
-const Trial = styled.div`
-  position: fixed;
-  left: 0;
-  top: 0;
-  background-color: palevioletred;
-  clip-path: polygon(0 5%, 100% 0%, 100% 80%, 0 85%);
-  will-change: transform, width, height, clip-path;
-`;
+//   & > .gatsby-image-wrapper {
+//     height: 100%;
+//   }
+// `;
 
 const ContentComp = memo(({ loc, locPhotos, setLightboxPhoto }) => {
   const setCursorLoc = useContext(CursorContext);
@@ -115,34 +107,39 @@ const ContentComp = memo(({ loc, locPhotos, setLightboxPhoto }) => {
     <>
       <Content className={`${loc}-section`}>
         <Marquee>Taipei City 臺北</Marquee>
-        {groupedLocPhotos.map(group => {
+        {groupedLocPhotos.map((group, groupIdx) => {
           return (
             <ImageRow>
-              {group.map(photo => {
+              {group.map((photo, idx) => {
                 return (
-                  <ImageWrapper
-                    onMouseEnter={() => setCursorLoc("image")}
-                    onMouseLeave={() => setCursorLoc("neutral")}
-                    onClick={e => {
-                      const initDims = e.target.getBoundingClientRect();
-                      setLightboxPhoto({
-                        fluid: photo.fluid,
-                        initDims
-                      });
-                    }}
-                  >
-                    <Img
-                      fluid={photo.fluid}
-                      imgStyle={{ objectFit: "cover" }}
-                    />
-                  </ImageWrapper>
+                  <Thumbnail
+                    image={photo}
+                    idx={
+                      (groupIdx + 1) * groupSize - (groupSize - (idx + 1)) - 1
+                    }
+                  />
+                  // <ImageWrapper
+                  //   onMouseEnter={() => setCursorLoc("image")}
+                  //   onMouseLeave={() => setCursorLoc("neutral")}
+                  //   onClick={e => {
+                  //     const initDims = e.target.getBoundingClientRect();
+                  //     setLightboxPhoto({
+                  //       fluid: photo.fluid,
+                  //       initDims
+                  //     });
+                  //   }}
+                  // >
+                  //   <Img
+                  //     fluid={photo.fluid}
+                  //     imgStyle={{ objectFit: "cover" }}
+                  //   />
+                  // </ImageWrapper>
                 );
               })}
             </ImageRow>
           );
         })}
       </Content>
-      <Trial id="trial" />
     </>
   );
 });

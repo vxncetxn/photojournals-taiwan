@@ -4,13 +4,15 @@ import { graphql, useStaticQuery } from "gatsby";
 import { CursorContext } from "../CursorContext";
 
 import Defaults from "../components/Defaults";
-import Lightbox from "../components/Lightbox";
+// import Lightbox from "../components/Lightbox";
 import Hero from "../components/Hero";
 import Content from "../components/Content";
 import Popout from "../components/Popout";
 import SectionPagi from "../components/SectionPagi";
 import Cursor from "../components/Cursor";
 import CursorPalette from "../components/CursorPalette";
+
+import { Lightbox } from "../components/LightboxPackage";
 
 const locs = ["taipei", "istanbul"];
 
@@ -63,15 +65,23 @@ export default () => {
   `).allFile.nodes;
 
   return (
-    <>
+    <Lightbox
+      images={photos.flatMap(photo => {
+        if (photo.relativeDirectory === "taipei") {
+          return photo.sharp;
+        } else {
+          return [];
+        }
+      })}
+    >
       <Defaults />
       <CursorContext.Provider value={setCursorLoc}>
-        {lightboxPhoto ? (
+        {/* {lightboxPhoto ? (
           <Lightbox
             lightboxPhoto={lightboxPhoto}
             setLightboxPhoto={setLightboxPhoto}
           />
-        ) : null}
+        ) : null} */}
         <Hero />
         {locs.map(loc => {
           return (
@@ -101,6 +111,6 @@ export default () => {
           setCursorColor={setCursorColor}
         />
       </CursorContext.Provider>
-    </>
+    </Lightbox>
   );
 };
