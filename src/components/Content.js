@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext, memo } from "react";
+import React, { useState, useEffect, memo } from "react";
 import styled from "styled-components";
 // import Img from "gatsby-image";
 import { window } from "browser-monads";
 
-import { CursorContext } from "../CursorContext";
+// import { CursorContext } from "../CursorContext";
 
 import Marquee from "./Marquee";
 import { Thumbnail } from "./LightboxPackage";
@@ -78,8 +78,8 @@ const ImageRow = styled.div`
 //   }
 // `;
 
-const ContentComp = memo(({ loc, locPhotos, setLightboxPhoto }) => {
-  const setCursorLoc = useContext(CursorContext);
+const ContentComp = memo(({ loc, locPhotos }) => {
+  // const setCursorLoc = useContext(CursorContext);
 
   const [groupSize, setGroupSize] = useState(4);
 

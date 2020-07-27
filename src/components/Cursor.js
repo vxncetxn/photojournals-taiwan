@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, memo } from "react";
+import React, { useEffect, memo } from "react";
 import styled, { keyframes } from "styled-components";
 import { window } from "browser-monads";
 
@@ -23,12 +23,12 @@ const Cursor = styled.div`
   top: 0;
   left: 0;
   mix-blend-mode: difference;
-  z-index: 999;
+  z-index: 1000;
 
   width: 140px;
   height: 140px;
   clip-path: ${props =>
-    props.cursorLoc === "neutral" ? "circle(30%)" : "circle(50%)"};
+    props.cursorLoc === "neutral" ? "circle(25%)" : "circle(50%)"};
   mix-blend-mode: difference;
   background-color: ${props => cursorColorList[props.cursorColor]};
 
@@ -101,18 +101,34 @@ const CursorIcon = styled.span`
   animation: ${CursorRotate} 10s linear infinite forwards;
 `;
 
+const Trial = styled.svg`
+  animation: ${CursorRotate} 10s linear infinite forwards;
+`;
+
+const RingText = styled.text`
+  font-family: var(--font-secondary), sans-serif;
+  font-size: 60px;
+  font-weight: 700;
+  color: #e6e6e6;
+  text-transform: uppercase;
+  letter-spacing: 22px;
+`;
+
 const CursorComp = memo(({ cursorLoc, cursorColor }) => {
   useEffect(() => {
     window.addEventListener("mousemove", e => {
       document.querySelector(".cursor").style.left = `${e.clientX - 70}px`;
       document.querySelector(".cursor").style.top = `${e.clientY - 70}px`;
 
-      document.querySelector(".cursor-label").style.left = `${e.clientX -
-        101}px`;
-      document.querySelector(".cursor-label").style.top = `${e.clientY - 90}px`;
-      document.querySelector(".cursor-icon").style.left = `${e.clientX - 25}px`;
-      document.querySelector(".cursor-icon").style.top = `${e.clientY -
-        23.5}px`;
+      document.querySelector(".cursor-text").style.left = `${e.clientX - 55}px`;
+      document.querySelector(".cursor-text").style.top = `${e.clientY - 55}px`;
+
+      // document.querySelector(".cursor-label").style.left = `${e.clientX -
+      //   101}px`;
+      // document.querySelector(".cursor-label").style.top = `${e.clientY - 90}px`;
+      // document.querySelector(".cursor-icon").style.left = `${e.clientX - 25}px`;
+      // document.querySelector(".cursor-icon").style.top = `${e.clientY -
+      //   23.5}px`;
     });
   }, []);
 
@@ -123,7 +139,36 @@ const CursorComp = memo(({ cursorLoc, cursorColor }) => {
         cursorColor={cursorColor}
         className="cursor"
       />
-      <CursorLabel className="cursor-label">
+      <div
+        className="cursor-text"
+        style={{
+          position: "fixed",
+          width: 150,
+          height: 150,
+          pointerEvents: "none"
+        }}
+      >
+        <Trial
+          className="cursor-text"
+          enable-background="new 0 0 512 512"
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+          width="108"
+          height="108"
+          fill="white"
+        >
+          <defs>
+            <path
+              id="textcircle"
+              d="M50,250c0-110.5,89.5-200,200-200s200,89.5,200,200s-89.5,200-200,200S50,360.5,50,250"
+            />
+          </defs>
+          <RingText dy="0">
+            <textPath xlinkHref="#textcircle">Visit Link</textPath>
+          </RingText>
+        </Trial>
+      </div>
+      {/* <CursorLabel className="cursor-label">
         {cursorLoc === "image"
           ? "View Image"
           : cursorLoc === "anchor"
@@ -152,7 +197,6 @@ const CursorComp = memo(({ cursorLoc, cursorColor }) => {
         ) : cursorLoc === "choice" ? (
           <svg
             enableBackground="new 0 0 383.344 383.345"
-            height="383.345"
             viewBox="0 0 383.344 383.345"
             width="20px"
             height="20px"
@@ -166,7 +210,7 @@ const CursorComp = memo(({ cursorLoc, cursorColor }) => {
         ) : cursorLoc === "popped-label" ? (
           <span style={{ marginBottom: "5px" }}>-</span>
         ) : null}
-      </CursorIcon>
+      </CursorIcon> */}
     </>
   );
 });

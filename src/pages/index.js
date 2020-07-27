@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { graphql, useStaticQuery } from "gatsby";
 
 import { CursorContext } from "../CursorContext";
@@ -21,7 +21,7 @@ export default () => {
   const [cursorLoc, setCursorLoc] = useState("neutral");
   const [cursorColor, setCursorColor] = useState(0);
   const [currentSection, setCurrentSection] = useState("hero");
-  const [lightboxPhoto, setLightboxPhoto] = useState(null);
+  // const [lightboxPhoto, setLightboxPhoto] = useState(null);
 
   //   useEffect(() => {
   //     const observerHero = new IntersectionObserver(
@@ -76,12 +76,6 @@ export default () => {
     >
       <Defaults />
       <CursorContext.Provider value={setCursorLoc}>
-        {/* {lightboxPhoto ? (
-          <Lightbox
-            lightboxPhoto={lightboxPhoto}
-            setLightboxPhoto={setLightboxPhoto}
-          />
-        ) : null} */}
         <Hero />
         {locs.map(loc => {
           return (
@@ -95,7 +89,6 @@ export default () => {
                   return [];
                 }
               })}
-              setLightboxPhoto={setLightboxPhoto}
             />
           );
         })}

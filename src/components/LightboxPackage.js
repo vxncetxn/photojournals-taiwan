@@ -65,6 +65,34 @@ const LightboxOverlay = styled.div`
   }
 `;
 
+const ArrowButtonLeft = styled.button`
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--font-primary);
+  font-size: 80px;
+  line-height: 0.45;
+  color: white;
+  transform: translate(200px, calc(50vh - 50%));
+  // transform: translate(calc(100vw - 200px - 35px), calc(100vh - 150px + 20px))
+  //   rotate(-25deg);
+  // border: 1px solid red;
+`;
+
+const ArrowButtonRight = styled.button`
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--font-primary);
+  font-size: 80px;
+  line-height: 0.45;
+  color: white;
+  transform: translate(calc(100vw - 200px), calc(50vh - 50%));
+  // transform: translate(calc(100vw - 200px + 35px), calc(100vh - 150px - 20px))
+  //   rotate(-25deg);
+  // border: 1px solid red;
+`;
+
 export const Thumbnail = ({ image, alt, idx, ...others }) => {
   const { setCurrentIdx, setInitDims } = useContext(LightboxContext);
 
@@ -86,6 +114,12 @@ export const Lightbox = ({ images, children, ...others }) => {
   const [initDims, setInitDims] = useState({});
   const [closed, setClosed] = useState(true);
 
+  const goToNextImage = () => setCurrentIdx((currentIdx + 1) % images.length);
+  const goToPreviousImage = () =>
+    currentIdx - 1 < 0
+      ? setCurrentIdx(images.length - 1)
+      : setCurrentIdx(currentIdx - 1);
+
   useEffect(() => {
     if (currentIdx + 1) {
       setClosed(false);
@@ -95,13 +129,9 @@ export const Lightbox = ({ images, children, ...others }) => {
   return (
     <LightboxContext.Provider value={{ setCurrentIdx, setInitDims }}>
       {children}
-      {currentIdx ? (
+      {currentIdx + 1 ? (
         <LightboxOverlay
           {...others}
-          onClick={() => {
-            setClosed(true);
-            setTimeout(() => setCurrentIdx(NaN), 500);
-          }}
           closed={closed}
           aspectRatio={images[currentIdx].fluid.aspectRatio}
           left={initDims.left}
@@ -113,6 +143,30 @@ export const Lightbox = ({ images, children, ...others }) => {
             fluid={images[currentIdx].fluid}
             imgStyle={{ objectFit: "cover" }}
           />
+          <ArrowButtonLeft onClick={goToPreviousImage}>
+            <svg
+              enable-background="new 0 0 443.52 443.52"
+              viewBox="0 0 443.52 443.52"
+              xmlns="http://www.w3.org/2000/svg"
+              width="50"
+              height="50"
+              fill="white"
+            >
+              <path d="m143.492 221.863 192.734-192.734c6.663-6.664 6.663-17.468 0-24.132-6.665-6.662-17.468-6.662-24.132 0l-204.8 204.8c-6.662 6.664-6.662 17.468 0 24.132l204.8 204.8c6.78 6.548 17.584 6.36 24.132-.42 6.387-6.614 6.387-17.099 0-23.712z" />
+            </svg>
+          </ArrowButtonLeft>
+          <ArrowButtonRight onClick={goToNextImage}>
+            <svg
+              enable-background="new 0 0 443.52 443.52"
+              viewBox="0 0 443.52 443.52"
+              xmlns="http://www.w3.org/2000/svg"
+              width="50"
+              height="50"
+              fill="white"
+            >
+              <path d="m336.226 209.591-204.8-204.8c-6.78-6.548-17.584-6.36-24.132.42-6.388 6.614-6.388 17.099 0 23.712l192.734 192.734-192.734 192.734c-6.663 6.664-6.663 17.468 0 24.132 6.665 6.663 17.468 6.663 24.132 0l204.8-204.8c6.663-6.665 6.663-17.468 0-24.132z" />
+            </svg>
+          </ArrowButtonRight>
         </LightboxOverlay>
       ) : null}
     </LightboxContext.Provider>
